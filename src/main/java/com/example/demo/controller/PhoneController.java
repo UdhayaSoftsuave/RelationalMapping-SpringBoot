@@ -22,10 +22,13 @@ public class PhoneController {
 	@GetMapping("/run")
 	private void run() {
 		System.out.println("Api got hitted");
-		PhoneDetails phoneDetails1 = new PhoneDetails("AAA", "spring");
-		PhoneDetails phoneDetails2 = new PhoneDetails("BBB", "Angular");
+		PhoneDetails phoneDetails1 = new PhoneDetails();
+		phoneDetails1.setProvider("AAA");
+		phoneDetails1.setTechnology("IT");
 		
 		Phone phone = new Phone("101", phoneDetails1);
+		
+		phoneDetails1.setPhone(phone);
 		
 		Phone save = phoneRepo.save(phone);
 		System.out.println(save);
@@ -34,9 +37,6 @@ public class PhoneController {
 	@GetMapping("/getphone")
 	private List<Phone> getPhone() {
 		List<Phone> save = phoneRepo.findAll();
-		for (Phone phone : save) {
-			System.out.println(phone.getDetails().getProvider());
-		}
 		return save;
 		
 	}

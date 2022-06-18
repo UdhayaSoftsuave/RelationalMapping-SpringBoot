@@ -3,10 +3,14 @@ package com.example.demo.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,8 +29,9 @@ public class Phone {
 	
 	private String number;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL , fetch = FetchType.EAGER)
 	@JoinColumn(name = "details_id")
+	
 	private PhoneDetails details;
 
 	public Phone(String number, PhoneDetails details) {
