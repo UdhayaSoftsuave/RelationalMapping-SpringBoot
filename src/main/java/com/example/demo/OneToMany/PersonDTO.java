@@ -23,6 +23,6 @@ public class PersonDTO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true )
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true ,mappedBy = "person")
 	private List<PhoneDTO> phones = new ArrayList<>();
 }

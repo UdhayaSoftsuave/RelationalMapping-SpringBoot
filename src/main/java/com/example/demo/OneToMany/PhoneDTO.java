@@ -1,5 +1,6 @@
 package com.example.demo.OneToMany;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,5 +25,7 @@ public class PhoneDTO {
 	
 	private String number;
 	
-
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
+	private PersonDTO person;
 }

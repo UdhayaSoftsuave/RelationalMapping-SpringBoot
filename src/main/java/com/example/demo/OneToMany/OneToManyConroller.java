@@ -40,6 +40,10 @@ public class OneToManyConroller {
 		
 		PersonDTO dto = new PersonDTO();
 		dto.setPhones(dtos);
+		
+		phone1.setPerson(dto);
+		phone2.setPerson(dto);
+		phone3.setPerson(dto);
 
 		
 		PersonDTO save = personRepository.save(dto);
@@ -62,6 +66,23 @@ public class OneToManyConroller {
 	public Boolean deletePeron(@PathVariable(value = "id") int value) {
 		personRepository.deleteById((long) value);
 		return personRepository.existsById(Long.valueOf(value));
+	}
+	
+	@GetMapping("/savePhone")
+	public PhoneDTO savePhone() {
+		
+		List<PhoneDTO> dtos = new ArrayList<PhoneDTO>();
+		
+		PhoneDTO phone1 = new PhoneDTO();
+		phone1.setNumber("999666333");
+		dtos.add(phone1);
+		
+		PersonDTO dto = new PersonDTO();
+		dto.setPhones(dtos);
+		
+		phone1.setPerson(dto);
+
+		return phoneRepository.save(phone1);
 	}
 
 }
