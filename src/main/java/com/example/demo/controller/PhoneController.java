@@ -1,9 +1,13 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Phone;
@@ -19,18 +23,23 @@ public class PhoneController {
 	@Autowired
 	private PhoneDetailsRepository details;
 	
-	@GetMapping("/run")
+	@PutMapping("/run")
 	private void run() {
 		System.out.println("Api got hitted");
-		PhoneDetails phoneDetails1 = new PhoneDetails();
-		phoneDetails1.setProvider("AAA");
-		phoneDetails1.setTechnology("IT");
 		
-		Phone phone = new Phone("101", phoneDetails1);
+		PhoneDetails phoneDetails1 = details.findById(9l).get();
+		
+		phoneDetails1.setProvider("333");
+		phoneDetails1.setTechnology("fff");
+		
+		Phone phone = phoneRepo.findById(phoneDetails1.getPhone().getId()).get();
+		
+		phone.setNumber("666");
 		
 		phoneDetails1.setPhone(phone);
+		phone.setDetails(phoneDetails1);
 		
-		Phone save = phoneRepo.save(phone);
+		PhoneDetails save = details.save(phoneDetails1);
 		System.out.println(save);
 	}
 	
